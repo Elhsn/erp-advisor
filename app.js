@@ -380,3 +380,80 @@ function showConfirm(out){
 });
 
 applyLang();
+
+/* Buyer journey progress - private, stored only in the visitor's browser. */
+(function () {
+  "use strict";
+  var STAGES = ["concepts", "erps", "implementation", "calculator", "questions"];
+  var KEY = "de-erp-journey-v1";
+  function read() { try { return JSON.parse(localStorage.getItem(KEY)) || {}; } catch (e) { return {}; } }
+  function write(s) { try { localStorage.setItem(KEY, JSON.stringify(s)); } catch (e) {} }
+  var m = location.pathname.match(/([^/]+)\.html$/);
+  var current = m ? m[1] : "index";
+  var st = read();
+  if (STAGES.indexOf(current) !== -1 && !st[current]) { st[current] = 1; write(st); }
+  var ar = document.documentElement.dir === "rtl";
+  document.querySelectorAll(".journey-badge[data-stage]").forEach(function (el) {
+    if (st[el.getAttribute("data-stage")]) el.textContent = " ✓";
+  });
+  var el = document.getElementById(ar ? "journey-progress-ar" : "journey-progress-en");
+  if (el) {
+    var done = STAGES.filter(function (k) { return st[k]; }).length;
+    var next = STAGES.filter(function (k) { return !st[k]; })[0];
+    var EN = { concepts: "Understand", erps: "Compare", implementation: "Plan", calculator: "Budget", questions: "Concerns" };
+    var AR = { concepts: "افهم", erps: "قارن", implementation: "خطط", calculator: "الميزانية", questions: "المخاوف" };
+    el.hidden = false;
+    if (done === 0) el.textContent = ar ? "رحلتك لسه في الأول - ابدأ بمرحلة «افهم»." : "Your journey is just starting - begin with Understand.";
+    else if (!next) el.textContent = ar ? "استكشفت المراحل الخمس كلها - جاهز للخطوة الأخيرة: الاستشارة." : "You have explored all five stages - ready for the final step: your consultation.";
+    else el.textContent = ar ? ("استكشفت " + done + " من ٥ مراحل. التالي: " + AR[next] + ".") : ("You have explored " + done + " of 5 stages. Next up: " + EN[next] + ".");
+  }
+})();
+
+/* Readiness check - answers stay in the visitor's browser (localStorage only). */
+(function () {
+  "use strict";
+  var KEY = "de-erp-readiness-v1";
+  function read() { try { return JSON.parse(localStorage.getItem(KEY)) || {}; } catch (e) { return {}; } }
+  function write(s) { try { localStorage.setItem(KEY, JSON.stringify(s)); } catch (e) {} }
+  var ar = document.documentElement.dir === "rtl";
+  var wrap = document.getElementById(ar ? "readiness-ar" : "readiness-en");
+  if (!wrap) return;
+  var LABELS_EN = { close: "late month closes", stock: "inventory you cannot count", numbers: "numbers arriving late" };
+  var LABELS_AR = { close: "قفلة الشهر المتأخرة", stock: "مخزون مش متجرد بدقة", numbers: "أرقام بتوصل متأخر" };
+  function paint(st) {
+    wrap.querySelectorAll(".readiness-q").forEach(function (q) {
+      var k = q.getAttribute("data-q"), a = st[k];
+      q.querySelectorAll(".readiness-note").forEach(function (n) { n.hidden = n.getAttribute("data-a") !== a; });
+      q.querySelectorAll("button").forEach(function (b) { b.disabled = !!a; if (b.getAttribute("data-a") === a) b.classList.add("picked"); });
+    });
+    var ans = Object.keys(st).filter(function (k) { return st[k]; });
+    var sum = document.getElementById(ar ? "readiness-summary-ar" : "readiness-summary-en");
+    if (sum && ans.length === 3) {
+      var nos = ans.filter(function (k) { return st[k] === "no"; });
+      sum.hidden = false;
+      if (nos.length === 0) sum.textContent = ar ? "إجاباتك بتقول إن أدواتك الحالية لسه كفاية - مرحلة «افهم» هتأكدلك ده." : "Your answers say your current tools may still be enough - the Understand stage will confirm it.";
+      else {
+        var labels = nos.map(function (k) { return (ar ? LABELS_AR : LABELS_EN)[k]; });
+        sum.textContent = ar
+          ? ("إجاباتك بتشاور على: " + labels.join("، ") + ". ابدأ بمرحلة «افهم»، وبعدها «الميزانية» - أو احجز استشارتك على طول.")
+          : ("Your answers flag: " + labels.join(", ") + ". Start with Understand, then Budget - or book your consultation directly.");
+      }
+    }
+    /* personalize the journey progress line with their own answers */
+    var prog = document.getElementById(ar ? "journey-progress-ar" : "journey-progress-en");
+    var nos2 = Object.keys(st).filter(function (k) { return st[k] === "no"; });
+    if (prog && nos2.length && prog.textContent && prog.dataset.personalized !== "1") {
+      var l2 = nos2.map(function (k) { return (ar ? LABELS_AR : LABELS_EN)[k]; });
+      prog.textContent += ar ? (" (من إجاباتك: " + l2.join("، ") + ")") : (" (from your answers: " + l2.join(", ") + ")");
+      prog.dataset.personalized = "1";
+    }
+  }
+  wrap.querySelectorAll("button[data-a]").forEach(function (b) {
+    b.addEventListener("click", function () {
+      var st = read();
+      st[b.closest(".readiness-q").getAttribute("data-q")] = b.getAttribute("data-a");
+      write(st); paint(st);
+    });
+  });
+  paint(read());
+})();
