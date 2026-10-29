@@ -92,8 +92,8 @@
     function el(tag, cls, html) { var n = document.createElement(tag); if (cls) n.className = cls; if (html != null) n.innerHTML = html; return n; }
     var done = ST.slice(0, 5).filter(function (s) { return st[s[0]]; }).length;
 
-    var ph = document.querySelector(".page-hero");
-    if (ph && !document.querySelector(".stage-rail")) {
+    document.querySelectorAll(".page-hero").forEach(function (ph) {
+    if (!(ph.nextElementSibling && ph.nextElementSibling.classList.contains("stage-rail"))) {
       var nav = el("nav", "stage-rail");
       nav.setAttribute("aria-label", "ERP journey");
       var wrap = el("div", "wrap"), ol = el("ol");
@@ -109,6 +109,7 @@
       wrap.appendChild(ol); nav.appendChild(wrap);
       ph.parentNode.insertBefore(nav, ph.nextSibling);
     }
+    });
 
     document.querySelectorAll("main .hero").forEach(function (hero) {
       var main = hero.closest("main");
