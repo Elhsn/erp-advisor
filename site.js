@@ -129,8 +129,8 @@
       panel.innerHTML = html; w.appendChild(panel);
 
       var items = ar
-        ? [["\u0665", "\u0645\u0631\u0627\u062d\u0644 \u0645\u0646\u0638\u0651\u0645\u0629 \u0645\u0646 \u0627\u0644\u0641\u0647\u0645 \u0644\u0644\u0642\u0631\u0627\u0631"], ["\u0663", "\u0623\u0633\u0626\u0644\u0629 \u0628\u0633 \u0641\u064a \u0641\u062d\u0635 \u0627\u0644\u062c\u0627\u0647\u0632\u064a\u0629"], ["\u0664\u0665 \u062f", "\u0627\u0633\u062a\u0634\u0627\u0631\u0629 \u0645\u0639 \u0645\u0633\u062a\u0634\u0627\u0631 Digital Economics"], ["\u062e\u0627\u0635", "\u062a\u0642\u062f\u0645\u0643 \u0628\u064a\u0641\u0636\u0644 \u0641\u064a \u0645\u062a\u0635\u0641\u062d\u0643"]]
-        : [["5", "guided stages, from first questions to decision"], ["3", "question readiness check with a clear result"], ["45 min", "consultation with a Digital Economics advisor"], ["Private", "progress stays in your browser"]];
+        ? [["\u0666", "\u062e\u0637\u0648\u0627\u062a \u0645\u0646 \u0623\u0648\u0644 \u0633\u0624\u0627\u0644 \u0644\u062d\u062f \u0627\u0644\u0627\u0633\u062a\u0634\u0627\u0631\u0629"], ["\u0663", "\u0623\u0633\u0626\u0644\u0629 \u0628\u0633 \u0641\u064a \u0641\u062d\u0635 \u0627\u0644\u062c\u0627\u0647\u0632\u064a\u0629"], ["\u0664\u0665 \u062f", "\u0627\u0633\u062a\u0634\u0627\u0631\u0629 \u0645\u0639 \u0645\u0633\u062a\u0634\u0627\u0631 Digital Economics"], ["\u062e\u0627\u0635", "\u062a\u0642\u062f\u0645\u0643 \u0628\u064a\u0641\u0636\u0644 \u0641\u064a \u0645\u062a\u0635\u0641\u062d\u0643"]]
+        : [["6", "steps, from first question to your advisor consultation"], ["3", "question readiness check with a clear result"], ["45 min", "consultation with a Digital Economics advisor"], ["Private", "progress stays in your browser"]];
       var strip = el("section", "metrics");
       var card = el("div", "metrics-card");
       items.forEach(function (it) { card.appendChild(el("div", "metric", "<b>" + it[0] + "</b><span>" + it[1] + "</span>")); });
