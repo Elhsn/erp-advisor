@@ -196,3 +196,6 @@ html,body{overflow-x:hidden}
 
 .c-region-hint { font-size: 13px; color: #8a6d1a; background: #fdf6ec; border: 1px solid #ead9a8; border-radius: 8px; padding: 8px 12px; margin: 8px 0 4px; }
 .calc-result .calc-region { font-size: 13.5px; font-weight: 600; color: #ffe08a; background: rgba(255,255,255,.08); border: 1px solid rgba(255,224,138,.45); border-radius: 8px; padding: 8px 12px; margin: 12px 0 0; }
+@media (prefers-reduced-motion: reduce) {
+  .reveal { opacity: 1; transform: none; transition: none; }
+                                                                   }
