@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ERP Cost Estimation Calculator - Digital Economics</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+Arabic:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="topbar">
+  <div class="wrap topbar-inner">
+    <a href="index.html"><img src="de_logo.png" alt="Digital Economics" class="logo"></a>
+    <nav class="main-nav" id="mainNav">
+      <a href="index.html" data-page="index"><span class="l-en">Home</span><span class="l-ar">الرئيسية</span></a>
+      <a href="concepts.html" data-page="concepts"><span class="l-en">ERP Guide</span><span class="l-ar">دليل ERP</span></a>
+      <a href="erps.html" data-page="erps"><span class="l-en">Top ERPs</span><span class="l-ar">أشهر الأنظمة</span></a>
+      <a href="implementation.html" data-page="implementation"><span class="l-en">Implementation</span><span class="l-ar">التنفيذ</span></a>
+      <a href="glossary.html" data-page="glossary"><span class="l-en">Glossary</span><span class="l-ar">المصطلحات</span></a>
+      <a href="calculator.html" data-page="calculator" class="active"><span class="l-en">Cost Calculator</span><span class="l-ar">حاسبة التكلفة</span></a>
+    </nav>
+    <button id="navToggle" type="button" aria-label="Menu">☰</button>
+    <button id="langToggle" class="lang-toggle" type="button">العربية</button>
+  </div>
+</header>
+
+<!-- ================= ENGLISH ================= -->
+<main id="lang-en">
+<section class="page-hero">
+  <div class="wrap">
+    <p class="eyebrow">Digital Economics · Estimate</p>
+    <h1>ERP cost estimation calculator</h1>
+    <p class="lead">A grounded first look at the two halves of an ERP budget: the published subscription price, and the one-time project components you plan yourself.</p>
+  </div>
+</section>
+<div class="wrap content">
+
+<div class="callout warn reveal"><p><strong>Read first:</strong> subscription figures use vendors' published list prices only (sources and date shown with the result). Where a vendor publishes no list price, we say so instead of guessing. One-time project costs are your own planning inputs, kept separate from the priced subtotal. This is not a Digital Economics quotation.</p></div>
+
+<div class="calc-form reveal">
+  <label for="c-users">How many people will use the system?</label>
+  <select id="c-users">
+    <option value="10">Up to 10 users</option>
+    <option value="25" selected>11-25 users</option>
+    <option value="50">26-50 users</option>
+    <option value="100">51-100 users</option>
+    <option value="150">More than 100 users</option>
+  </select>
+
+  <label for="c-tier">Which product are you considering?</label>
+  <select id="c-tier">
+    <optgroup label="Odoo (published list prices - international USD book)">
+      <option value="odoo_std" selected>Odoo Standard (all apps, cloud)</option>
+      <option value="odoo_cus">Odoo Custom (multi-company, Studio, external API)</option>
+    </optgroup>
+    <optgroup label="Microsoft (published list prices)">
+      <option value="bc_ess">Business Central Essentials</option>
+      <option value="bc_prem">Business Central Premium</option>
+      <option value="d365_fin">Dynamics 365 Finance</option>
+      <option value="d365_finp">Dynamics 365 Finance Premium</option>
+    </optgroup>
+    <optgroup label="Oracle">
+      <option value="ora_fusion">Fusion ERP Cloud (published list price)</option>
+      <option value="ora_ns">NetSuite (vendor-quoted)</option>
+    </optgroup>
+    <optgroup label="SAP (vendor-quoted)">
+      <option value="sap_s4">SAP S/4HANA Cloud</option>
+      <option value="sap_b1">SAP Business One</option>
+    </optgroup>
+    <option value="custom_rate">I have a vendor quote - let me enter the rate</option>
+    <option value="notsure">Not sure yet - help me compare</option>
+  </select>
+
+  <label for="c-rate">If you have a quote: per-user/month rate in USD (yearly billing)</label>
+  <input id="c-rate" type="number" min="0" step="1" inputmode="decimal" placeholder="e.g. 35">
+
+  <p class="c-region-hint">List prices are country- and term-specific: Odoo shows different USD books by country, and the Microsoft and Oracle figures are US-dollar lists. The result names the book it uses; confirm which applies to your country before relying on it.</p>
+
+  <label for="c-scope">Which functional areas do you need? (shapes the project, not the subscription)</label>
+  <select id="c-scope">
+    <option>Core finance only</option>
+    <option selected>Finance + inventory/purchasing/sales</option>
+    <option>The above + HR, manufacturing or projects</option>
+    <option>Full suite across departments</option>
+  </select>
+
+  <label for="c-custom">How much customization do you expect? (shapes the project)</label>
+  <select id="c-custom">
+    <option selected>Mostly standard with configuration</option>
+    <option>Some customizations and integrations</option>
+    <option>Heavy customization or complex integrations</option>
+  </select>
+
+  <p style="margin:22px 0 6px;font-weight:700">One-time project budget (optional - enter your own planning numbers in USD)</p>
+  <p style="margin:0 0 12px;font-size:14px;color:var(--muted)">Leave blank anything you cannot estimate; we will mark it quote-needed rather than hide it.</p>
+
+  <label for="c-impl">Implementation services (consulting, configuration, testing, go-live)</label>
+  <input id="c-impl" type="number" min="0" step="500" inputmode="numeric" placeholder="e.g. 25000">
+  <label for="c-mig">Data migration (extract, clean, map, load legacy data)</label>
+  <input id="c-mig" type="number" min="0" step="500" inputmode="numeric" placeholder="e.g. 8000">
+  <label for="c-int">Integrations (e-commerce, payment, shipping, banks...)</label>
+  <input id="c-int" type="number" min="0" step="500" inputmode="numeric" placeholder="e.g. 6000">
+  <label for="c-train">Training and change management</label>
+  <input id="c-train" type="number" min="0" step="500" inputmode="numeric" placeholder="e.g. 5000">
+
+  <p style="margin:22px 0 6px;font-weight:700">Annual extras (recurring, optional)</p>
+  <p style="margin:0 0 12px;font-size:14px;color:var(--muted)">Recurring every year on top of the subscription - not part of the one-time project budget.</p>
+  <label for="c-sup">Support, hosting add-ons, extra environments</label>
+  <input id="c-sup" type="number" min="0" step="500" inputmode="numeric" placeholder="e.g. 4000">
+
+  <button id="c-calc" class="btn btn-primary" type="button" style="margin-top:20px">Estimate my budget</button>
+</div>
+
+<div id="c-result" class="calc-result" aria-live="polite">
+  <p class="range-label" id="c-year1-label">Annual subscription (list price)</p>
+  <p class="num" id="c-year1">-</p>
+  <div class="calc-rows">
+    <div class="row"><span id="c-sub-label">How it is computed</span><strong id="c-sub">-</strong></div>
+    <div class="row"><span>One-time components (your inputs)</span><strong id="c-onetime">-</strong></div>
+    <div class="row"><span>Annual extras (recurring)</span><strong id="c-annual">-</strong></div>
+    <div class="row"><span>Still quote-needed</span><strong id="c-notinc">-</strong></div>
+  </div>
+  <p id="c-region" class="calc-region" style="display:none"></p>
+  <p style="font-size:13px;opacity:.85;margin-top:14px"><strong>This is not a complete ERP cost.</strong> The priced line above is a published subscription subtotal only, and billing terms differ by vendor. Sources (retrieved 29 Oct 2026): <a href="https://www.odoo.com/pricing">odoo.com/pricing</a> - the page shows a lower international USD book ($24.90/$49.00 per user/month at yearly billing) and a higher United States book (US$31.10/$61.00); which book applies depends on your country, so confirm eligibility with Odoo before relying on either. Odoo notes the yearly discount is valid for the first 12 months for initial users, and Odoo.sh hosting costs extra. Microsoft US list (<a href="https://www.microsoft.com/en-us/dynamics-365/products/business-central/pricing">Business Central pricing</a>, <a href="https://www.microsoft.com/en-us/dynamics-365/products/finance/pricing">Dynamics 365 Finance pricing</a>) - per user/month, paid yearly. <a href="https://www.oracle.com/a/ocom/docs/corporate/pricing/oracle-fusion-cloud-global-price-list.pdf">Oracle Fusion Cloud Service Global Price List (PDF)</a> dated 8 Oct 2026, "Prices in USA (Dollar)" - monthly subscription per hosted named user, 10-user minimum, standard 3-year term (part B91079). SAP and NetSuite publish no list price and quote directly. Vendors change prices; confirm current rates before deciding. Excludes hardware and tax.</p>
+</div>
+
+<h2 class="reveal">What shapes the one-time budget</h2>
+<ul class="reveal">
+  <li><strong>Scope:</strong> the modules and processes you bring in phase one.</li>
+  <li><strong>Customization and integrations:</strong> standard configuration is the cheapest path; each customization adds build, test and upgrade cost.</li>
+  <li><strong>Data migration:</strong> how much legacy data exists and how clean it is.</li>
+  <li><strong>Training and change management:</strong> sized to your teams, not to the software.</li>
+</ul>
+
+<div class="callout reveal"><p>Want a real quotation instead of list prices? <a href="index.html#step3">Book a 45-minute consultation</a> and we will scope it properly.</p></div>
+</div>
+
+</main>
+<!-- ================= ARABIC ================= -->
+<main id="lang-ar" hidden>
+<section class="page-hero">
+  <div class="wrap">
+    <p class="eyebrow">ديجيتال إيكونوميكس · تقدير</p>
+    <h1>حاسبة تقدير تكلفة ERP</h1>
+    <p class="lead">نظرة أولية مؤسّسة على نصفي ميزانية أي نظام ERP: سعر الاشتراك المنشور، ومكونات المشروع اللي بتحصل مرة واحدة واللي بتخططها بنفسك.</p>
+  </div>
+</section>
+<div class="wrap content">
+
+<div class="callout warn reveal"><p><strong>اقرأ الأول:</strong> أرقام الاشتراك بتستخدم أسعار القائمة المنشورة من المورّدين بس (المصادر والتاريخ ظاهرين مع النتيجة). ولما مورّد مبينشرش سعر قائمة، بنقول كده بوضوح بدل ما نخمن. تكاليف المشروع اللي بتحصل مرة واحدة هي أرقام تخطيط منك أنت، ومنفصلة عن الإجمالي المُسعّر. ده مش عرض سعر من ديجيتال إيكونوميكس.</p></div>
+
+<div class="calc-form reveal">
+  <label for="c-users">كام شخص هيستخدم النظام؟</label>
+  <select id="c-users">
+    <option value="10">لحد 10 مستخدمين</option>
+    <option value="25" selected>11-25 مستخدم</option>
+    <option value="50">26-50 مستخدم</option>
+    <option value="100">51-100 مستخدم</option>
+    <option value="150">أكتر من 100 مستخدم</option>
+  </select>
+
+  <label for="c-tier">أنهي منتج بتفكر فيه؟</label>
+  <select id="c-tier">
+    <optgroup label="Odoo (أسعار قائمة منشورة - الكتاب الدولي بالدولار)">
+      <option value="odoo_std" selected>Odoo Standard (كل التطبيقات، سحابي)</option>
+      <option value="odoo_cus">Odoo Custom (تعدد شركات، Studio، واجهات API)</option>
+    </optgroup>
+    <optgroup label="Microsoft (أسعار قائمة منشورة)">
+      <option value="bc_ess">Business Central Essentials</option>
+      <option value="bc_prem">Business Central Premium</option>
+      <option value="d365_fin">Dynamics 365 Finance</option>
+      <option value="d365_finp">Dynamics 365 Finance Premium</option>
+    </optgroup>
+    <optgroup label="Oracle">
+      <option value="ora_fusion">Fusion ERP Cloud (سعر قائمة منشور)</option>
+      <option value="ora_ns">NetSuite (بعرض سعر من المورّد)</option>
+    </optgroup>
+    <optgroup label="SAP (بعرض سعر من المورّد)">
+      <option value="sap_s4">SAP S/4HANA Cloud</option>
+      <option value="sap_b1">SAP Business One</option>
+    </optgroup>
+    <option value="custom_rate">معايا عرض سعر من مورّد - هكتب السعر بنفسي</option>
+    <option value="notsure">لسه مش متأكد - ساعدني أقارن</option>
+  </select>
+
+  <label for="c-rate">لو معاك عرض سعر: سعر المستخدم/الشهر بالدولار (فوترة سنوية)</label>
+  <input id="c-rate" type="number" min="0" step="1" inputmode="decimal" placeholder="مثال: 35">
+
+  <p class="c-region-hint">الأسعار المنشورة بتختلف حسب البلد وطريقة الدفع: أودو بيعرض تسعيرات دولارية مختلفة حسب الدولة، وأرقام مايكروسوفت وأوراكل من قوائم أمريكية بالدولار. النتيجة بتوضح المصدر اللي استخدمته؛ تأكد من انطباقه على بلدك قبل ما تعتمد عليه.</p>
+
+  <label for="c-scope">أنهي مجالات وظيفية محتاجها؟ (بتأثر على المشروع، مش على الاشتراك)</label>
+  <select id="c-scope">
+    <option>المالية الأساسية بس</option>
+    <option selected>المالية + المخزون/المشتريات/المبيعات</option>
+    <option>اللي فوق + الموارد البشرية أو التصنيع أو المشاريع</option>
+    <option>المنظومة كاملة على كل الأقسام</option>
+  </select>
+
+  <label for="c-custom">قد إيه التخصيص المتوقع؟ (بيأثر على المشروع)</label>
+  <select id="c-custom">
+    <option selected>معياري في الأغلب مع إعدادات</option>
+    <option>شوية تخصيصات وتكاملات</option>
+    <option>تخصيص تقيل أو تكاملات معقدة</option>
+  </select>
+
+  <p style="margin:22px 0 6px;font-weight:700">ميزانية المشروع (مرة واحدة) - اختياري، اكتب أرقامك التخطيطية بالدولار</p>
+  <p style="margin:0 0 12px;font-size:14px;color:var(--muted)">سيب فاضي أي بند مش قادر تقدّره؛ هنعلّمه "محتاج تسعير" بدل ما نخفيه.</p>
+
+  <label for="c-impl">خدمات التنفيذ (استشارات، إعداد، اختبار، تشغيل فعلي)</label>
+  <input id="c-impl" type="number" min="0" step="500" inputmode="numeric" placeholder="مثال: 25000">
+  <label for="c-mig">ترحيل البيانات (استخراج وتنضيف ونقل البيانات القديمة)</label>
+  <input id="c-mig" type="number" min="0" step="500" inputmode="numeric" placeholder="مثال: 8000">
+  <label for="c-int">التكاملات (تجارة إلكترونية، مدفوعات، شحن، بنوك...)</label>
+  <input id="c-int" type="number" min="0" step="500" inputmode="numeric" placeholder="مثال: 6000">
+  <label for="c-train">التدريب وإدارة التغيير</label>
+  <input id="c-train" type="number" min="0" step="500" inputmode="numeric" placeholder="مثال: 5000">
+
+  <p style="margin:22px 0 6px;font-weight:700">إضافات سنوية (متكررة، اختياري)</p>
+  <p style="margin:0 0 12px;font-size:14px;color:var(--muted)">بتتدفع كل سنة فوق الاشتراك - مش جزء من ميزانية المشروع اللي بتحصل مرة واحدة.</p>
+  <label for="c-sup">الدعم، إضافات الاستضافة، بيئات إضافية</label>
+  <input id="c-sup" type="number" min="0" step="500" inputmode="numeric" placeholder="مثال: 4000">
+
+  <button id="c-calc" class="btn btn-primary" type="button" style="margin-top:20px">قدّر ميزانيتي</button>
+</div>
+
+<div id="c-result" class="calc-result" aria-live="polite">
+  <p class="range-label" id="c-year1-label">الاشتراك السنوي (سعر القائمة)</p>
+  <p class="num" id="c-year1">-</p>
+  <div class="calc-rows">
+    <div class="row"><span id="c-sub-label">إزاي بيتحسب</span><strong id="c-sub">-</strong></div>
+    <div class="row"><span>مكونات المشروع - مرة واحدة (أرقامك أنت)</span><strong id="c-onetime">-</strong></div>
+    <div class="row"><span>إضافات سنوية (متكررة)</span><strong id="c-annual">-</strong></div>
+    <div class="row"><span>لسه محتاج تسعير</span><strong id="c-notinc">-</strong></div>
+  </div>
+  <p id="c-region" class="calc-region" style="display:none"></p>
+  <p style="font-size:13px;opacity:.85;margin-top:14px"><strong>ده مش التكلفة الكاملة لنظام ERP.</strong> السطر المُسعّر فوق هو إجمالي اشتراك منشور بس، وشروط الدفع بتختلف من مورّد للتاني. المصادر (اتجمعت في 29 أكتوبر 2026): <a href="https://www.odoo.com/pricing">odoo.com/pricing</a> - الصفحة بتعرض كتاب دولي بالدولار أقل ($24.90/$49.00 لكل مستخدم/شهر بفوترة سنوية) وكتاب أعلى خاص بالولايات المتحدة (US$31.10/$61.00)؛ وأنهي كتاب بينطبق عليك بيعتمد على بلدك، فاتأكد من الأهلية مع Odoo قبل ما تعتمد على أي سعر. Odoo بتوضح إن خصم الفوترة السنوية صالح لأول 12 شهر للمستخدمين الأوائل، واستضافة Odoo.sh بتكلفة إضافية. قائمة Microsoft الأمريكية (<a href="https://www.microsoft.com/en-us/dynamics-365/products/business-central/pricing">أسعار Business Central</a>، <a href="https://www.microsoft.com/en-us/dynamics-365/products/finance/pricing">أسعار Dynamics 365 Finance</a>) - لكل مستخدم/شهر، تُدفع سنويًا. <a href="https://www.oracle.com/a/ocom/docs/corporate/pricing/oracle-fusion-cloud-global-price-list.pdf">قائمة أسعار Oracle Fusion Cloud العالمية (PDF)</a> بتاريخ 8 أكتوبر 2026، "أسعار بالدولار الأمريكي" - اشتراك شهري لكل مستخدم مُسمّى مستضاف، بحد أدنى 10 مستخدمين، ومدة قياسية 3 سنوات (الجزء B91079). SAP وNetSuite مبينشروش سعر قائمة وبيعملوا عروض سعر مباشرة. المورّدين بيغيّروا أسعارهم؛ اتأكد من الأسعار الحالية قبل القرار. لا يشمل الأجهزة أو الضرائب.</p>
+</div>
+
+<h2 class="reveal">إيه اللي بيشكّل ميزانية المشروع (مرة واحدة)</h2>
+<ul class="reveal">
+  <li><strong>النطاق:</strong> الوحدات والعمليات اللي بتدخل في المرحلة الأولى.</li>
+  <li><strong>التخصيص والتكاملات:</strong> الإعداد المعياري هو أرخص طريق؛ كل تخصيص بيضيف تكلفة بناء واختبار وتحديث.</li>
+  <li><strong>ترحيل البيانات:</strong> حجم البيانات القديمة ومدى نضافتها.</li>
+  <li><strong>التدريب وإدارة التغيير:</strong> على قد فرق شغلك، مش على قد السوفتوير.</li>
+</ul>
+
+<div class="callout reveal"><p>عايز عرض سعر حقيقي بدل أسعار القائمة؟ <a href="index.html#step3">احجز استشارة 45 دقيقة</a> وهنحدد النطاق بشكل صحيح.</p></div>
+</div>
+
+</main>
+<footer class="site-footer">
+  <div class="wrap">
+    <p><span class="l-en">Digital Economics - digital transformation agency and Odoo Partner.</span><span class="l-ar">Digital Economics - شركة تحول رقمي وشريك Odoo.</span></p>
+    <p dir="ltr">Alhassan@de.com.eg · +20 150 782 8222 · www.de.com.eg</p>
+  </div>
+</footer>
+<script src="site.js"></script>
+
+<script src="calculator.js"></script>
+</body>
+</html>
