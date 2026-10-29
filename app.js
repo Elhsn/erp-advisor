@@ -418,34 +418,68 @@ applyLang();
   var ar = document.documentElement.dir === "rtl";
   var wrap = document.getElementById(ar ? "readiness-ar" : "readiness-en");
   if (!wrap) return;
-  var LABELS_EN = { close: "late month closes", stock: "inventory you cannot count", numbers: "numbers arriving late" };
+  var KEYS = ["close", "stock", "numbers"];
+  var LABELS_EN = { close: "Late month closes", stock: "Inventory you cannot count", numbers: "Numbers arriving late" };
   var LABELS_AR = { close: "قفلة الشهر المتأخرة", stock: "مخزون مش متجرد بدقة", numbers: "أرقام بتوصل متأخر" };
+  var NOTES_EN = { close: "The most common first trigger we see.", stock: "Where spreadsheets usually break first.", numbers: "Exactly what an ERP is built to fix." };
+  var NOTES_AR = { close: "أشهر أول سبب بنشوفه.", stock: "أول حتة الإكسل بتكسر فيها عادة.", numbers: "ده بالظبط اللي الـ ERP متبني يحلها." };
+  var T = ar ? {
+    h3: "نتيجتك باختصار",
+    verdictAll: "إجاباتك التلاتة بتقول إن أدواتك الحالية لسه شايلاك. الخطوة الجاية مش نظام جديد - إنك تتأكد إن الصورة كاملة.",
+    verdictGaps: "إجاباتك بتشاور على النقط دي - علامات إن الأدوات الحالية وصلت لحدودها:",
+    nextAll: 'الخطوة المقترحة: ابدأ بمرحلة <a href="concepts.html">«افهم»</a> - هتأكدلك ده، وهتوريك تراقب إيه وانت بتكبر.',
+    nextGaps: 'الخطوة المقترحة: ابدأ بـ<a href="concepts.html">«افهم»</a>، وبعدها <a href="calculator.html">«الميزانية»</a> - أو <a href="#step3-ar">احجز استشارتك</a> على طول.',
+    privacy: "إجاباتك بتفضل على جهازك - مش بنشوفها ولا بنخزنها.",
+    reset: "ابدأ من الأول"
+  } : {
+    h3: "Your readiness snapshot",
+    verdictAll: "All three answers say your current tools still carry you. The next step is not a new system - it is confirming that is the full picture.",
+    verdictGaps: "Your answers flag the areas below - signs the current tools are reaching their limits:",
+    nextAll: 'Suggested next step: start with the <a href="concepts.html">Understand stage</a> - it will confirm that, and show what to watch as you grow.',
+    nextGaps: 'Suggested next step: start with <a href="concepts.html">Understand</a>, then <a href="calculator.html">Budget</a> - or <a href="#step3">book your consultation</a> directly.',
+    privacy: "Answers stay in your browser - we never see or store them.",
+    reset: "Start over"
+  };
+  var prog = document.getElementById(ar ? "journey-progress-ar" : "journey-progress-en");
   function paint(st) {
     wrap.querySelectorAll(".readiness-q").forEach(function (q) {
       var k = q.getAttribute("data-q"), a = st[k];
       q.querySelectorAll(".readiness-note").forEach(function (n) { n.hidden = n.getAttribute("data-a") !== a; });
-      q.querySelectorAll("button").forEach(function (b) { b.disabled = !!a; if (b.getAttribute("data-a") === a) b.classList.add("picked"); });
+      q.querySelectorAll("button").forEach(function (b) {
+        b.disabled = !!a;
+        b.classList.toggle("picked", b.getAttribute("data-a") === a);
+      });
     });
-    var ans = Object.keys(st).filter(function (k) { return st[k]; });
-    var sum = document.getElementById(ar ? "readiness-summary-ar" : "readiness-summary-en");
-    if (sum && ans.length === 3) {
-      var nos = ans.filter(function (k) { return st[k] === "no"; });
-      sum.hidden = false;
-      if (nos.length === 0) sum.textContent = ar ? "إجاباتك بتقول إن أدواتك الحالية لسه كفاية - مرحلة «افهم» هتأكدلك ده." : "Your answers say your current tools may still be enough - the Understand stage will confirm it.";
+    var res = document.getElementById(ar ? "readiness-result-ar" : "readiness-result-en");
+    if (res) {
+      var ans = KEYS.filter(function (k) { return st[k]; });
+      if (ans.length < KEYS.length) { res.hidden = true; res.innerHTML = ""; }
       else {
-        var labels = nos.map(function (k) { return (ar ? LABELS_AR : LABELS_EN)[k]; });
-        sum.textContent = ar
-          ? ("إجاباتك بتشاور على: " + labels.join("، ") + ". ابدأ بمرحلة «افهم»، وبعدها «الميزانية» - أو احجز استشارتك على طول.")
-          : ("Your answers flag: " + labels.join(", ") + ". Start with Understand, then Budget - or book your consultation directly.");
+        var nos = ans.filter(function (k) { return st[k] === "no"; });
+        var html = "<h3>" + T.h3 + "</h3>";
+        html += '<p class="rr-verdict">' + (nos.length ? T.verdictGaps : T.verdictAll) + "</p>";
+        if (nos.length) {
+          html += '<ul class="rr-gaps">' + nos.map(function (k) {
+            return "<li><strong>" + (ar ? LABELS_AR : LABELS_EN)[k] + "</strong> - " + (ar ? NOTES_AR : NOTES_EN)[k] + "</li>";
+          }).join("") + "</ul>";
+        }
+        html += '<p class="rr-next">' + (nos.length ? T.nextGaps : T.nextAll) + "</p>";
+        html += '<p class="rr-foot"><span>' + T.privacy + '</span><button type="button" class="rr-reset">' + T.reset + "</button></p>";
+        res.innerHTML = html;
+        res.hidden = false;
+        res.querySelector(".rr-reset").addEventListener("click", function () { write({}); paint({}); });
       }
     }
     /* personalize the journey progress line with their own answers */
-    var prog = document.getElementById(ar ? "journey-progress-ar" : "journey-progress-en");
-    var nos2 = Object.keys(st).filter(function (k) { return st[k] === "no"; });
-    if (prog && nos2.length && prog.textContent && prog.dataset.personalized !== "1") {
-      var l2 = nos2.map(function (k) { return (ar ? LABELS_AR : LABELS_EN)[k]; });
-      prog.textContent += ar ? (" (من إجاباتك: " + l2.join("، ") + ")") : (" (from your answers: " + l2.join(", ") + ")");
-      prog.dataset.personalized = "1";
+    if (prog) {
+      if (!prog.dataset.base && prog.textContent) prog.dataset.base = prog.textContent;
+      if (prog.dataset.base) {
+        var nos2 = KEYS.filter(function (k) { return st[k] === "no"; });
+        if (nos2.length) {
+          var l2 = nos2.map(function (k) { return ar ? LABELS_AR[k] : LABELS_EN[k].charAt(0).toLowerCase() + LABELS_EN[k].slice(1); });
+          prog.textContent = prog.dataset.base + (ar ? (" (من إجاباتك: " + l2.join("، ") + ")") : (" (from your answers: " + l2.join(", ") + ")"));
+        } else prog.textContent = prog.dataset.base;
+      }
     }
   }
   wrap.querySelectorAll("button[data-a]").forEach(function (b) {
@@ -453,6 +487,12 @@ applyLang();
       var st = read();
       st[b.closest(".readiness-q").getAttribute("data-q")] = b.getAttribute("data-a");
       write(st); paint(st);
+      var res = document.getElementById(ar ? "readiness-result-ar" : "readiness-result-en");
+      if (res && !res.hidden) {
+        var smooth = true;
+        try { smooth = !window.matchMedia("(prefers-reduced-motion: reduce)").matches; } catch (e) {}
+        res.scrollIntoView({ behavior: smooth ? "smooth" : "auto", block: "nearest" });
+      }
     });
   });
   paint(read());
