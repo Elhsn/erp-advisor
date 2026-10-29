@@ -43,3 +43,31 @@
     }
   });
 })();
+
+/* Buyer journey progress - private, stored only in the visitor's browser. */
+(function () {
+  "use strict";
+  var STAGES = ["concepts", "erps", "implementation", "calculator", "questions"];
+  var KEY = "de-erp-journey-v1";
+  function read() { try { return JSON.parse(localStorage.getItem(KEY)) || {}; } catch (e) { return {}; } }
+  function write(s) { try { localStorage.setItem(KEY, JSON.stringify(s)); } catch (e) {} }
+  var m = location.pathname.match(/([^/]+)\.html$/);
+  var current = m ? m[1] : "index";
+  var st = read();
+  if (STAGES.indexOf(current) !== -1 && !st[current]) { st[current] = 1; write(st); }
+  var ar = document.documentElement.dir === "rtl";
+  document.querySelectorAll(".journey-badge[data-stage]").forEach(function (el) {
+    if (st[el.getAttribute("data-stage")]) el.textContent = " ✓";
+  });
+  var el = document.getElementById(ar ? "journey-progress-ar" : "journey-progress-en");
+  if (el) {
+    var done = STAGES.filter(function (k) { return st[k]; }).length;
+    var next = STAGES.filter(function (k) { return !st[k]; })[0];
+    var EN = { concepts: "Understand", erps: "Compare", implementation: "Plan", calculator: "Budget", questions: "Concerns" };
+    var AR = { concepts: "افهم", erps: "قارن", implementation: "خطط", calculator: "الميزانية", questions: "المخاوف" };
+    el.hidden = false;
+    if (done === 0) el.textContent = ar ? "رحلتك لسه في الأول - ابدأ بمرحلة «افهم»." : "Your journey is just starting - begin with Understand.";
+    else if (!next) el.textContent = ar ? "استكشفت المراحل الخمس كلها - جاهز للخطوة الأخيرة: الاستشارة." : "You have explored all five stages - ready for the final step: your consultation.";
+    else el.textContent = ar ? ("استكشفت " + done + " من ٥ مراحل. التالي: " + AR[next] + ".") : ("You have explored " + done + " of 5 stages. Next up: " + EN[next] + ".");
+  }
+})();
