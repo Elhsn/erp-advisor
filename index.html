@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Digital Economics - Find the Right ERP for Your Business</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+Arabic:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="topbar">
+  <div class="wrap topbar-inner">
+    <a href="index.html"><img src="de_logo.png" alt="Digital Economics" class="logo"></a>
+    <nav class="main-nav" id="mainNav">
+      <a href="index.html" data-page="index" class="active"><span class="l-en">Home</span><span class="l-ar">الرئيسية</span></a>
+      <a href="concepts.html" data-page="concepts"><span class="l-en">ERP Guide</span><span class="l-ar">دليل ERP</span></a>
+      <a href="erps.html" data-page="erps"><span class="l-en">Top ERPs</span><span class="l-ar">أشهر الأنظمة</span></a>
+      <a href="implementation.html" data-page="implementation"><span class="l-en">Implementation</span><span class="l-ar">التنفيذ</span></a>
+      <a href="glossary.html" data-page="glossary"><span class="l-en">Glossary</span><span class="l-ar">المصطلحات</span></a>
+      <a href="calculator.html" data-page="calculator"><span class="l-en">Cost Calculator</span><span class="l-ar">حاسبة التكلفة</span></a>
+    </nav>
+    <button id="navToggle" type="button" aria-label="Menu">☰</button>
+    <button id="langToggle" class="lang-toggle" type="button">العربية</button>
+  </div>
+</header>
+
+<!-- ================= ENGLISH ================= -->
+<main id="lang-en">
+
+<section class="hero">
+  <div class="wrap">
+    <p class="eyebrow">Digital Economics · Business Applications Advisory</p>
+    <h1>Choose the ERP that fits your business,<br>not the other way around</h1>
+    <p class="lead">A short guided journey for owners and decision-makers: map your current situation, learn what actually matters when comparing ERP systems, then book a 45-minute consultation with a Digital Economics advisor.</p>
+    <div class="hero-ctas">
+      <a href="#step1" class="btn btn-primary">Start the journey</a>
+      <a href="#step3" class="btn btn-ghost">Book directly</a>
+    </div>
+    <p class="fine">Digital Economics is a digital transformation agency and an Odoo Partner.</p>
+  </div>
+</section>
+
+<section class="step" id="step1">
+  <div class="wrap">
+    <p class="step-num">Step 1</p>
+    <h2>Map your current situation</h2>
+    <p class="step-sub">Four quick questions. Your answers shape what you should look for - and help us prepare for your consultation.</p>
+
+    <div class="assess">
+      <div class="assess-grid">
+        <label>Your industry
+          <select id="en-industry">
+            <option value="">Select…</option>
+            <option>Manufacturing</option>
+            <option>Trading &amp; distribution</option>
+            <option>Retail &amp; e-commerce</option>
+            <option>Contracting &amp; construction</option>
+            <option>Real estate</option>
+            <option>Professional services</option>
+            <option>Food &amp; restaurants</option>
+            <option>Healthcare</option>
+            <option>Education &amp; training</option>
+            <option>Other</option>
+          </select>
+        </label>
+        <label>Company size
+          <select id="en-size">
+            <option value="">Select…</option>
+            <option>1–10 employees</option>
+            <option>11–50 employees</option>
+            <option>51–200 employees</option>
+            <option>More than 200</option>
+          </select>
+        </label>
+        <label>Where you are today
+          <select id="en-current">
+            <option value="">Select…</option>
+            <option>No system - paper and spreadsheets</option>
+            <option>Accounting software only</option>
+            <option>Several disconnected systems</option>
+            <option>We have an ERP but we're not happy with it</option>
+          </select>
+        </label>
+        <label>When do you want to decide?
+          <select id="en-timeline">
+            <option value="">Select…</option>
+            <option>As soon as possible (0–3 months)</option>
+            <option>Within 3–6 months</option>
+            <option>Within 6–12 months</option>
+            <option>Still exploring</option>
+          </select>
+        </label>
+      </div>
+
+      <fieldset class="challenges">
+        <legend>What's hurting most today? (choose any)</legend>
+        <div class="chip-row" id="en-chips">
+          <button type="button" class="chip" data-k="inventory">Inventory &amp; stock accuracy</button>
+          <button type="button" class="chip" data-k="accounting">Accounting &amp; e-invoicing</button>
+          <button type="button" class="chip" data-k="sales">Sales &amp; CRM follow-up</button>
+          <button type="button" class="chip" data-k="manufacturing">Production planning</button>
+          <button type="button" class="chip" data-k="purchasing">Purchasing &amp; suppliers</button>
+          <button type="button" class="chip" data-k="hr">HR &amp; payroll</button>
+          <button type="button" class="chip" data-k="reporting">Reporting &amp; visibility</button>
+          <button type="button" class="chip" data-k="branches">Multiple branches</button>
+        </div>
+      </fieldset>
+
+      <div class="assess-out" id="en-assess-out" hidden>
+        <h3>What this means for you</h3>
+        <ul id="en-assess-list"></ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="step step-alt" id="step2">
+  <div class="wrap">
+    <p class="step-num">Step 2</p>
+    <h2>Know what to evaluate before you decide</h2>
+    <p class="step-sub">The same criteria experienced evaluators use - apply them to any ERP and any vendor, including us.</p>
+    <div class="cards">
+      <div class="card"><h3>Fit to your processes</h3><p>Start from your own requirements, ranked must-have, important, nice-to-have. The system that covers your musts with the least tailoring wins.</p></div>
+      <div class="card"><h3>Total cost, not license price</h3><p>Licenses are only one line. Add implementation, data migration, training, customization and ongoing support before you compare.</p></div>
+      <div class="card"><h3>The partner matters as much as the software</h3><p>Most ERP outcomes depend on implementation quality: discovery, configuration, data, training. Evaluate the team, not only the demo.</p></div>
+      <div class="card"><h3>References in your industry</h3><p>Ask for clients similar to you in sector and size, and ask them what went wrong as well as what went right.</p></div>
+      <div class="card"><h3>Support after go-live</h3><p>Who answers when something breaks? Agree response times and support terms before signing, not after.</p></div>
+      <div class="card"><h3>Room to grow</h3><p>New branches, more users, more modules. Changing ERP is expensive - pick what you won't outgrow.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="step" id="step3">
+  <div class="wrap">
+    <p class="step-num">Step 3</p>
+    <h2>Book your 45-minute consultation</h2>
+    <p class="step-sub">Pick a time that suits you (Cairo time), then a few details so we can prepare.</p>
+
+    <div class="booking">
+      <div class="slot-panel">
+        <h3 class="panel-title">1 · Choose your time</h3>
+        <div id="en-demo-note" class="demo-note" hidden>Demo times shown - live availability connects at launch.</div>
+        <div id="en-dates" class="date-row"></div>
+        <div id="en-slots" class="slot-grid"><p class="muted" data-i18n-pickdate>Pick a day above to see available times.</p></div>
+      </div>
+
+      <form class="details-panel" id="en-form" novalidate>
+        <h3 class="panel-title">2 · Your details</h3>
+        <div class="chosen-slot" id="en-chosen" hidden></div>
+        <div class="form-grid">
+          <label>Full name *<input type="text" name="name" required autocomplete="name"></label>
+          <label>Company *<input type="text" name="company" required autocomplete="organization"></label>
+          <label>Job title *<input type="text" name="title" required autocomplete="organization-title"></label>
+          <label>Business email *<input type="email" name="email" required autocomplete="email"></label>
+          <label>Mobile (WhatsApp) *<input type="tel" name="mobile" required autocomplete="tel" placeholder="+20 …"></label>
+          <label>Current situation *
+            <select name="situation" required>
+              <option value="">Select…</option>
+              <option>No system - paper and spreadsheets</option>
+              <option>Accounting software only</option>
+              <option>Several disconnected systems</option>
+              <option>Have an ERP, looking to replace it</option>
+              <option>Other</option>
+            </select>
+          </label>
+        </div>
+        <label class="wide">Anything specific you'd like to discuss? <span class="opt">(optional)</span>
+          <textarea name="notes" rows="3"></textarea>
+        </label>
+        <input type="text" name="website" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true">
+        <fieldset class="mode-pick">
+          <legend>How would you like to meet? *</legend>
+          <label class="mode-opt"><input type="radio" name="mode" value="meet" checked>
+            <span><strong>Google Meet video call</strong><small>You get your meeting link right after booking.</small></span></label>
+          <label class="mode-opt"><input type="radio" name="mode" value="phone">
+            <span><strong>Phone call</strong><small>We call you on the mobile number above at the scheduled time.</small></span></label>
+        </fieldset>
+        <p class="consent">We use these details only to prepare and manage your consultation.</p>
+        <p class="form-error" id="en-error" hidden></p>
+        <button type="submit" class="btn btn-primary btn-block" id="en-submit">Confirm my 45-minute consultation</button>
+      </form>
+    </div>
+
+    <div class="confirm" id="en-confirm" hidden>
+      <h3>You're booked</h3>
+      <p id="en-confirm-when"></p>
+      <div id="en-confirm-meet"></div>
+      <p id="en-confirm-mode"></p>
+      <p class="demo-inline" id="en-confirm-demo" hidden></p>
+      <div class="confirm-actions">
+        <button type="button" class="btn btn-ghost" id="en-ics">Add to my calendar (.ics)</button>
+      </div>
+      <p class="fine">We'll also reach you on your mobile to confirm. Keep the time free - looking forward to it.</p>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="wrap footer-inner">
+    <div>
+      <img src="de_logo.png" alt="Digital Economics" class="logo footer-logo">
+      <p class="tagline">Unlock Your Business Growth Potential</p>
+    </div>
+    <div class="footer-contact">
+      <p><strong>Digital Economics LLC</strong> - Odoo Partner</p>
+      <p><a href="mailto:Alhassan@de.com.eg">Alhassan@de.com.eg</a> · <a href="tel:+201507828222">+20 150 782 8222</a></p>
+      <p><a href="https://www.de.com.eg" target="_blank" rel="noopener">www.de.com.eg</a></p>
+    </div>
+  </div>
+</footer>
+</main>
+
+<!-- ================= ARABIC ================= -->
+<main id="lang-ar" hidden>
+<section class="hero">
+  <div class="wrap">
+    <p class="eyebrow">ديجيتال إيكونوميكس · استشارات تطبيقات الأعمال</p>
+    <h1>اختار نظام الـ ERP اللي يناسب شغلك،<br>مش العكس</h1>
+    <p class="lead">رحلة قصيرة موجّهة لأصحاب الشركات وصنّاع القرار: حدّد وضعك الحالي، اعرف إيه المهم فعلاً لما تقارن بين أنظمة الـ ERP، وبعدين احجز استشارة ٤٥ دقيقة مع مستشار من ديجيتال إيكونوميكس.</p>
+    <div class="hero-ctas">
+      <a href="#step1-ar" class="btn btn-primary">ابدأ الرحلة</a>
+      <a href="#step3-ar" class="btn btn-ghost">احجز مباشرة</a>
+    </div>
+    <p class="fine">ديجيتال إيكونوميكس وكالة تحول رقمي وشريك Odoo.</p>
+  </div>
+</section>
+
+<section class="step" id="step1-ar">
+  <div class="wrap">
+    <p class="step-num">الخطوة ١</p>
+    <h2>حدّد وضعك الحالي</h2>
+    <p class="step-sub">أربع أسئلة سريعة. إجاباتك بتحدد اللي لازم تدور عليه - وبتساعدنا نجهّز لاستشارتك.</p>
+
+    <div class="assess">
+      <div class="assess-grid">
+        <label>مجال عملك
+          <select id="ar-industry">
+            <option value="">اختار…</option>
+            <option>صناعة</option>
+            <option>تجارة وتوزيع</option>
+            <option>تجزئة وتجارة إلكترونية</option>
+            <option>مقاولات وتشييد</option>
+            <option>عقارات</option>
+            <option>خدمات مهنية</option>
+            <option>أغذية ومطاعم</option>
+            <option>رعاية صحية</option>
+            <option>تعليم وتدريب</option>
+            <option>أخرى</option>
+          </select>
+        </label>
+        <label>حجم الشركة
+          <select id="ar-size">
+            <option value="">اختار…</option>
+            <option>١–١٠ موظفين</option>
+            <option>١١–٥٠ موظفاً</option>
+            <option>٥١–٢٠٠ موظف</option>
+            <option>أكثر من ٢٠٠</option>
+          </select>
+        </label>
+        <label>وضعك النهارده
+          <select id="ar-current">
+            <option value="">اختار…</option>
+            <option>مفيش نظام - ورق وإكسل</option>
+            <option>برنامج حسابات فقط</option>
+            <option>أنظمة متعددة غير مربوطة</option>
+            <option>عندنا ERP لكن مش مرتاحين له</option>
+          </select>
+        </label>
+        <label>عايز تقرر إمتى؟
+          <select id="ar-timeline">
+            <option value="">اختار…</option>
+            <option>في أقرب وقت (٠–٣ شهور)</option>
+            <option>خلال ٣–٦ شهور</option>
+            <option>خلال ٦–١٢ شهر</option>
+            <option>لسه بستكشف</option>
+          </select>
+        </label>
+      </div>
+
+      <fieldset class="challenges">
+        <legend>إيه أكتر حاجة مأثرة عليك النهارده؟ (اختار اللي ينطبق)</legend>
+        <div class="chip-row" id="ar-chips">
+          <button type="button" class="chip" data-k="inventory">دقة المخزون</button>
+          <button type="button" class="chip" data-k="accounting">الحسابات والفوترة الإلكترونية</button>
+          <button type="button" class="chip" data-k="sales">متابعة المبيعات و CRM</button>
+          <button type="button" class="chip" data-k="manufacturing">تخطيط الإنتاج</button>
+          <button type="button" class="chip" data-k="purchasing">المشتريات والموردين</button>
+          <button type="button" class="chip" data-k="hr">شؤون الموظفين والمرتبات</button>
+          <button type="button" class="chip" data-k="reporting">التقارير والرؤية</button>
+          <button type="button" class="chip" data-k="branches">فروع متعددة</button>
+        </div>
+      </fieldset>
+
+      <div class="assess-out" id="ar-assess-out" hidden>
+        <h3>إيه اللي يعنيه ده ليك</h3>
+        <ul id="ar-assess-list"></ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="step step-alt" id="step2-ar">
+  <div class="wrap">
+    <p class="step-num">الخطوة ٢</p>
+    <h2>اعرف إيه اللي تقيّمه قبل ما تقرر</h2>
+    <p class="step-sub">نفس المعايير اللي بيستخدمها المقيّمون المحترفون - طبّقها على أي نظام ERP وأي مورّد، بما فيهم إحنا.</p>
+    <div class="cards">
+      <div class="card"><h3>الملاءمة لعملياتك</h3><p>ابدأ من متطلباتك إنت، مرتّبة: أساسي، مهم، إضافي. النظام اللي بيغطي الأساسيات بأقل تعديل هو اللي يكسب.</p></div>
+      <div class="card"><h3>التكلفة الكلية مش سعر الترخيص</h3><p>التراخيص بند واحد فقط. ضيف التنفيذ، نقل البيانات، التدريب، التخصيص والدعم المستمر قبل المقارنة.</p></div>
+      <div class="card"><h3>الشريك بأهمية البرنامج نفسه</h3><p>معظم نتائج مشاريع الـ ERP بتعتمد على جودة التنفيذ: الفهم، الإعداد، البيانات، التدريب. قيّم الفريق مش العرض التقديمي بس.</p></div>
+      <div class="card"><h3>عملاء مرجعيون في مجالك</h3><p>اطلب عملاء شبهك في القطاع والحجم، واسألهم إيه اللي مضبطش قبل إيه اللي مضبط.</p></div>
+      <div class="card"><h3>الدعم بعد التشغيل</h3><p>مين بيرد لما حاجة توقف؟ اتفق على أوقات الاستجابة وشروط الدعم قبل التوقيع مش بعده.</p></div>
+      <div class="card"><h3>مساحة للنمو</h3><p>فروع جديدة، مستخدمين أكتر، وحدات إضافية. تغيير الـ ERP مكلف - اختار اللي مش هتكبر عليه.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="step" id="step3-ar">
+  <div class="wrap">
+    <p class="step-num">الخطوة ٣</p>
+    <h2>احجز استشارتك ٤٥ دقيقة</h2>
+    <p class="step-sub">اختار الوقت اللي يناسبك (بتوقيت القاهرة)، وبعدين قل لنا شوية تفاصيل عشان نجهّز.</p>
+
+    <div class="booking">
+      <div class="slot-panel">
+        <h3 class="panel-title">١ · اختار وقتك</h3>
+        <div id="ar-demo-note" class="demo-note" hidden>مواعيد تجريبية معروضة - المواعيد الفعلية هتتوفر عند الإطلاق.</div>
+        <div id="ar-dates" class="date-row"></div>
+        <div id="ar-slots" class="slot-grid"><p class="muted" data-i18n-pickdate>اختار يوم من فوق عشان تشوف المواعيد المتاحة.</p></div>
+      </div>
+
+      <form class="details-panel" id="ar-form" novalidate>
+        <h3 class="panel-title">٢ · بياناتك</h3>
+        <div class="chosen-slot" id="ar-chosen" hidden></div>
+        <div class="form-grid">
+          <label>الاسم بالكامل *<input type="text" name="name" required autocomplete="name"></label>
+          <label>الشركة *<input type="text" name="company" required autocomplete="organization"></label>
+          <label>المسمى الوظيفي *<input type="text" name="title" required></label>
+          <label>البريد الإلكتروني للعمل *<input type="email" name="email" required autocomplete="email" dir="ltr"></label>
+          <label>الموبايل (واتساب) *<input type="tel" name="mobile" required autocomplete="tel" placeholder="+20 …" dir="ltr"></label>
+          <label>الوضع الحالي *
+            <select name="situation" required>
+              <option value="">اختار…</option>
+              <option>مفيش نظام - ورق وإكسل</option>
+              <option>برنامج حسابات فقط</option>
+              <option>أنظمة متعددة غير مربوطة</option>
+              <option>عندنا ERP وبندور على بديل</option>
+              <option>أخرى</option>
+            </select>
+          </label>
+        </div>
+        <label class="wide">في حاجة معينة تحب تتكلم عنها؟ <span class="opt">(اختياري)</span>
+          <textarea name="notes" rows="3"></textarea>
+        </label>
+        <input type="text" name="website" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true">
+        <fieldset class="mode-pick">
+          <legend>تحب نقابل بعض إزاي؟ *</legend>
+          <label class="mode-opt"><input type="radio" name="mode" value="meet" checked>
+            <span><strong>مكالمة فيديو Google Meet</strong><small>هيوصلك لينك الاجتماع فور تأكيد الحجز.</small></span></label>
+          <label class="mode-opt"><input type="radio" name="mode" value="phone">
+            <span><strong>مكالمة تليفون</strong><small>هنكلمك على رقم الموبايل اللي فوق في الميعاد المحدد.</small></span></label>
+        </fieldset>
+        <p class="consent">بنستخدم البيانات دي فقط للتحضير لاستشارتك وإدارتها.</p>
+        <p class="form-error" id="ar-error" hidden></p>
+        <button type="submit" class="btn btn-primary btn-block" id="ar-submit">أكّد استشارتي ٤٥ دقيقة</button>
+      </form>
+    </div>
+
+    <div class="confirm" id="ar-confirm" hidden>
+      <h3>تم الحجز</h3>
+      <p id="ar-confirm-when"></p>
+      <div id="ar-confirm-meet"></div>
+      <p id="ar-confirm-mode"></p>
+      <p class="demo-inline" id="ar-confirm-demo" hidden></p>
+      <div class="confirm-actions">
+        <button type="button" class="btn btn-ghost" id="ar-ics">ضيفها لتقويمي (.ics)</button>
+      </div>
+      <p class="fine">هنتواصل معاك على موبايلك للتأكيد. سيب الوقت فاضي - مستعدين ليك.</p>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="wrap footer-inner">
+    <div>
+      <img src="de_logo.png" alt="Digital Economics" class="logo footer-logo">
+      <p class="tagline">Unlock Your Business Growth Potential</p>
+    </div>
+    <div class="footer-contact">
+      <p><strong>ديجيتال إيكونوميكس</strong> - شريك Odoo</p>
+      <p><a href="mailto:Alhassan@de.com.eg">Alhassan@de.com.eg</a> · <a href="tel:+201507828222" dir="ltr">+20 150 782 8222</a></p>
+      <p><a href="https://www.de.com.eg" target="_blank" rel="noopener">www.de.com.eg</a></p>
+    </div>
+  </div>
+</footer>
+</main>
+
+<script src="app.js"></script>
+</body>
+</html>
